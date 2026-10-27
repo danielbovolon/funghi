@@ -1,0 +1,15 @@
+{
+  "name": "harvest",
+  "version": "3.0.0",
+  "description": "An 8-channel mycelial sound system for the browser (Web Audio + AudioWorklet).",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes http-server -c-1 -p 8080 .",
+    "build": "node tools/build-standalone.mjs",
+    "test": "node tools/stress-test.mjs 20"
+  },
+  "author": "Daniel Bovolon",
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}

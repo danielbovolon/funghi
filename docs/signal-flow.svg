@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12">
+  <rect width="900" height="300" fill="#0d100f"/>
+  <g fill="none" stroke="#3b4742">
+    <rect x="20" y="40" width="150" height="220"/>
+    <rect x="200" y="40" width="150" height="220"/>
+    <rect x="380" y="40" width="150" height="220"/>
+    <rect x="560" y="110" width="140" height="80"/>
+    <rect x="730" y="110" width="150" height="80"/>
+  </g>
+  <g fill="#ebe4d2">
+    <text x="30" y="30">SOURCES</text><text x="210" y="30">CHANNEL x8</text><text x="390" y="30">NETWORK</text><text x="570" y="100">REVERB</text><text x="740" y="100">MASTER</text>
+  </g>
+  <g fill="#a9b2a4">
+    <text x="30" y="65">grains (recording)</text><text x="30" y="85">FM + complex FM</text><text x="30" y="105">ping resonator</text>
+    <text x="30" y="125">element voice:</text><text x="30" y="145">rumble / drips</text><text x="30" y="165">breath / whistle</text><text x="30" y="185">crackle / grit</text>
+    <text x="30" y="215">= generated sound</text><text x="30" y="235">(tapped to network)</text>
+    <text x="210" y="65">+ network input</text><text x="210" y="85">waveshaper/fold</text><text x="210" y="105">+ feedback (&lt;0.92)</text>
+    <text x="210" y="125">SVF + filter FM</text><text x="210" y="145">low pass gate</text><text x="210" y="165">tremor / flicker</text>
+    <text x="210" y="185">level guard + clip</text><text x="210" y="205">pan (map x)</text><text x="210" y="225">width / ripple</text>
+    <text x="390" y="65">taps of generated</text><text x="390" y="85">sound only:</text><text x="390" y="105">no loops between</text><text x="390" y="125">channels</text>
+    <text x="390" y="155">delay = distance</text><text x="390" y="175">weight = links</text><text x="390" y="195">x reach x cuts</text><text x="390" y="225">spores: resample mix</text>
+    <text x="570" y="135">6 s convolution</text><text x="570" y="155">darkening noise IR</text><text x="570" y="175">tone by element</text>
+    <text x="740" y="135">tilt, warmth, DC</text><text x="740" y="155">limiter -1 dBFS</text><text x="740" y="175">ceiling, recorder</text>
+  </g>
+  <g stroke="#ebe4d2" fill="none" stroke-width="1.4">
+    <path d="M170 150 H200"/><path d="M350 150 H380"/><path d="M455 260 V285 H275 V260"/>
+    <path d="M350 120 Q450 100 560 150"/><path d="M350 200 Q540 260 730 170"/><path d="M700 150 H730"/>
+  </g>
+  <text x="300" y="296" fill="#76827a">network input re-enters every other channel</text>
+</svg>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Harvest</title>
+<meta name="description" content="An 8-channel mycelial sound system: recordings grow, ping and graft through a living network of FM, waveshaping, low pass gates and element voices.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tektur:wght@500;700;900&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/harvest.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="#3b4742"/><path d="M33 13.2 V33 H1 V1 H21 V13.2 Z M21 1 V13.2" fill="none" stroke="#3b4742"/><path d="M21 13.2 A12 12 0 0 1 9 25.2 A7.6 7.6 0 0 1 1.4 17.6 A4.6 4.6 0 0 1 6 13 A2.8 2.8 0 0 1 8.8 15.8" fill="none" stroke="#ebe4d2" stroke-width="1.6"/><circle cx="21" cy="13.2" r="2" fill="#e65a2e"/></svg>
+      <div><div class="logo">HARVEST</div><div class="tag">mycelial sound system · 8 channels</div></div>
+    </div>
+    <div class="transport">
+      <button class="grow" id="grow" aria-pressed="false" title="Start or pause the system (Space)"><span class="ic"></span><span id="growTxt">GROW</span></button>
+      <button class="seed" id="seedBtn" title="New random preset: new sounds, elements, map shape and harmony (N)"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1 C11 4 11 10 7 13 C3 10 3 4 7 1 Z M7 4 V13" fill="none" stroke="#ebe4d2" stroke-width="1.4"/></svg>SEED</button>
+      <button class="rec" id="rec" aria-pressed="false" title="Record the master output (R)"><span class="dot"></span><span id="recTxt">RECORD</span></button>
+      <span class="rtime" id="rtime">00:00.0</span>
+    </div>
+    <div class="safety">
+      <canvas id="scope" width="120" height="34"></canvas>
+      <div class="lim"><div class="limbar"><i id="limI"></i></div><span id="limTxt">LIMITER 0.0 dB · PEAK −∞</span></div>
+      <span class="pill" id="pill" data-s="idle">DORMANT</span>
+    </div>
+    <div class="volw"><span>VOLUME</span><div class="slider" id="volS"><i></i></div><output id="volO"></output></div>
+    <button class="calm" id="calm" title="Clear every feedback and reverb tail and fade back in">CALM</button>
+  </header>
+
+  <main>
+    <section class="left">
+      <div class="net" id="net" data-tool="move">
+        <canvas id="netc"></canvas>
+        <div class="mapbar">
+          <div class="mgroup" id="tools"><span>TOOL</span></div>
+          <div class="mgroup" id="shapes"><span>SHAPE</span></div>
+          <div class="mgroup"><button class="tool hot" id="reshape">RESHAPE</button><button class="tool" id="freeze" aria-pressed="false">FREEZE LINKS</button></div>
+          <div class="nstat" id="nstat"></div>
+        </div>
+        <div class="hint" id="hint"><b>PRESS GROW</b><br>A random preset is loaded: new seed sounds, elements and map shape.<br>Press SEED for another one, or drop your own recordings on any node or strip.</div>
+        <div class="guide" id="guide"></div>
+        <div class="drop" id="drop" hidden>DROP TO SOW</div>
+      </div>
+      <div class="strips" id="strips"></div>
+      <div class="bottom">
+        <section class="panel">
+          <h2>SYSTEM <small>how all eight channels grow together · drag the seed between the elements</small></h2>
+          <div class="orgg">
+            <div class="pad" id="pad"><canvas id="padc"></canvas></div>
+            <div class="k4" id="orgk"></div>
+          </div>
+        </section>
+        <section class="panel harm">
+          <h2>HARMONY <small>root · scale · melodic walk</small></h2>
+          <div class="chips r" id="roots"></div>
+          <div class="chips s" id="scales"></div>
+          <div class="k5" id="harmk"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="right">
+      <section class="panel" id="chan">
+        <div class="chead">
+          <div class="cnum" id="cnum">1</div>
+          <div class="cmeta"><div class="ctitle" id="ctitle">CHANNEL</div><div class="cname" id="cname">—</div></div>
+          <div class="cact">
+            <button class="btn" id="cLoad">LOAD</button>
+            <button class="btn" id="cSave">SAVE SOUND</button>
+            <button class="btn" id="cClear">CLEAR</button>
+            <button class="btn" id="cMut">MUTATE</button>
+          </div>
+          <input type="file" id="cFile" accept="audio/*" hidden>
+        </div>
+        <div class="elsel" id="elsel"></div>
+        <canvas class="cwave" id="cwave"></canvas>
+        <div class="rows" id="rows"></div>
+      </section>
+      <section class="panel store">
+        <h2>STORE <small>recorded takes · 24-bit WAV · kept in this browser</small></h2>
+        <div class="player">
+          <canvas id="pwave"></canvas>
+          <div class="ptrans">
+            <button class="pb" id="pStart" title="Back to start">|◀</button>
+            <button class="pb" id="pBack" title="Back 5 seconds (J)">−5 s</button>
+            <button class="pb play" id="pPlay" title="Play / pause (K)">▶</button>
+            <button class="pb" id="pFwd" title="Forward 5 seconds (L)">+5 s</button>
+            <span class="ptime" id="pTime">00:00.0 / 00:00.0</span>
+            <span class="pname" id="pName">no take selected</span>
+            <button class="pb" id="pSave" title="Save this take as a 24-bit WAV">SAVE WAV</button>
+          </div>
+        </div>
+        <div class="sbar" id="filters"></div>
+        <div class="st" id="status"></div>
+        <div class="lib" id="lib"></div>
+        <div class="foot"><button class="btn" id="exportAll" hidden>EXPORT ALL · ZIP + MANIFEST</button></div>
+      </section>
+    </section>
+  </main>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>
